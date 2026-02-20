@@ -1,0 +1,635 @@
+/* Reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body{
+  font-family: var(--font);
+  background: #0b0b0b; /* fallback por si algo falla */
+  overflow-x: hidden;
+}
+
+:root{
+  --font: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --bebas: "Bebas Neue", sans-serif;
+}
+
+
+/* Fondo fixed full-screen */
+.bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: url("../assets/bg-desktop.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* opcional: para que se sienta más pro en pantallas grandes */
+  transform: translateZ(0);
+}
+
+/* Cambia el fondo en celular */
+@media (max-width: 768px){
+  .bg{
+    background-image: url("../assets/bg-mobile.webp");
+  }
+}
+
+/* El contenido va encima y puede scrollear */
+.content{
+  position: relative;
+  z-index: 1;
+}
+
+
+:root{
+  --font: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body{
+  font-family: var(--font);
+}
+
+/* Header fijo arriba */
+.site-header{
+  position: relative;
+  padding: 2.5vw;
+  z-index: 2;
+}
+
+
+/* Contenedor del nav */
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+/* Logo clickable */
+.logo{
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img{
+  height: 10vh;
+  width: auto;
+  display: block;
+}
+
+
+/* Links derecha */
+.nav-links{
+  display: inline-flex;
+  gap: 18px;
+}
+
+.nav-link{
+  color: #fff;
+  text-decoration: none;
+
+  font-weight: 700; /* bold */
+  font-size: 14px;
+  letter-spacing: 0.4px;
+}
+
+/* hover sutil */
+.nav-link:hover{
+  opacity: 0.85;
+}
+
+/* placeholders de secciones (temporal) */
+.section-spacer{
+  height: 100vh; /* temporal para probar navegación */
+}
+
+
+html{
+  scroll-behavior: smooth;
+}
+
+
+/* HERO centrado pantalla */
+.hero{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagen del sencillo */
+.hero-cover{
+  max-width: min(520px, 90vw);
+  height: auto;
+  display: block;
+}
+
+@media screen and (max-width: 768px){
+.site-header{
+  padding: 5vw;
+}
+
+.logo img{
+  height: 7vh;
+}
+
+.hero{
+  padding-top: 2vw;
+}
+.hero-cover{
+  max-width: min(520px, 80vw);
+}
+
+}
+
+
+/* Loader full-screen */
+.loader{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+
+  background: #0b0b0b;
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 450ms ease, visibility 450ms ease;
+}
+
+.loader-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #fff;
+  animation: pulse 900ms ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%, 100% { transform: scale(1); opacity: .35; }
+  50% { transform: scale(1.9); opacity: 1; }
+}
+
+/* Estado cuando ya cargó */
+body.is-loaded .loader{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Sección plataformas */
+.platforms{
+  padding: 30px 20px 70px;
+  margin: 0 auto;
+}
+
+.platforms-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+/* Botón */
+.platform-btn{
+  height: 64px;                 /* todos mismo alto */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.platform-btn:hover{
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* SVG dentro: misma altura visual */
+.platform-btn img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Mobile: 3 arriba, 2 abajo, ocupando 100% de ancho */
+@media (max-width: 768px){
+  .platforms{
+    width: 100%;
+    padding: 20px 16px 60px;
+  }
+
+  .platforms-grid{
+    grid-template-columns: 1fr;  /* uno debajo del otro */
+    gap: 5px;
+  }
+
+  .platform-btn{
+    height: 60px;      /* todos mismo alto */
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Importante: tu img estaba width:100%, eso lo hace gigante en móvil.
+     Lo limitamos para que se vea centrado y no estirado. */
+  .platform-btn img{
+    width: auto;
+    height: 60px;      /* controla el alto visual del logo */
+    max-width: 90%;
+    display: block;
+  }
+}
+
+
+.yt-section{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+
+/* 16:9 responsive */
+.yt-player-wrap{
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 real */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+}
+
+#yt-player{
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+/* Thumbs abajo */
+.yt-thumbs{
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.yt-thumb{
+  flex: 0 0 auto;
+  width: 150px;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  transform: translateY(0);
+  transition: opacity 160ms ease, transform 160ms ease;
+  border: none;
+}
+
+.yt-thumb:hover{
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.yt-thumb.is-active{
+  opacity: 1;
+}
+
+.yt-thumb img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px){
+  .yt-section{
+    padding: 30px 16px 70px;
+  }
+  .yt-thumb{
+    width: 20vw; /* se siente grande en móvil */
+    max-width: 190px;
+  }
+}
+
+
+/* ===== Scroll horizontal thumbnails ===== */
+
+.yt-thumbs{
+  scrollbar-width: thin;                  /* Firefox */
+  scrollbar-color: #DF2C52 transparent;   /* handle rosado + fondo transparente */
+}
+
+/* Chrome / Edge / Safari */
+.yt-thumbs::-webkit-scrollbar{
+  height: 10px;
+}
+
+.yt-thumbs::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.yt-thumbs::-webkit-scrollbar-thumb{
+  background: #DF2C52;      /* rosado */
+  border-radius: 999px;
+}
+
+.yt-thumbs::-webkit-scrollbar-thumb:hover{
+  background: #DF2C52;
+}
+
+.yt-thumbs{
+  scroll-behavior: smooth;
+}
+
+.yt-thumb{
+  scroll-snap-align: start;
+}
+
+.yt-thumbs{
+  scroll-snap-type: x proximity;
+}
+
+
+.footer-wrap{
+  width: 95vw;
+  margin: 0 auto;
+  padding-bottom: 2.5vw;
+}
+
+
+.footer-card{
+  background: #ffffff;        /* blanco puro */
+  border-radius: 22px;        /* vértices redondeados más elegantes */
+  padding: 48px 48px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+
+  /* esto hace que se vea separado del fondo espacial */
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.35),
+    0 1px 0 rgba(0,0,0,0.04);
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* izquierda */
+.footer-mark{
+  font-family: var(--bebas);
+  font-size: clamp(48px, 6vw, 82px);
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+  color: #DF2C52;
+  text-transform: uppercase;
+}
+
+
+.footer-links{
+  display: grid;
+  gap: 6px;
+  margin-bottom: 56px;
+}
+
+.footer-links a{
+  color: #DF2C52;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.footer-links a:hover{ opacity: 0.85; }
+
+.footer-copy{
+  color: #DF2C52;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* derecha */
+.footer-title{
+  margin: 0 0 10px;
+  font-family: var(--bebas);
+  font-size: clamp(32px, 3vw, 46px);
+  letter-spacing: 1px;
+  color: #111;
+}
+
+.footer-title span{
+  font-weight: 900;
+}
+
+.footer-text{
+  margin: 0 0 20px;
+  max-width: 520px;
+  color: #111;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.footer-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 36px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+.footer-btn:hover{ opacity: 0.92; transform: translateY(-1px); }
+
+.footer-social{
+  margin-top: 56px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-social a{
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+}
+
+.footer-social img{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .footer-card{
+    grid-template-columns: 1fr;
+    padding: 34px 22px;
+  }
+  .footer-links{ margin-bottom: 26px; }
+  .footer-social{
+    justify-content: flex-start;
+    margin-top: 28px;
+  }
+}
+
+
+/* ===== Merch ===== */
+.merch{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px 80px;
+}
+
+.merch-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+/* Card vidrio */
+.merch-card{
+  text-decoration: none;
+  color: #fff;
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  transform: translateY(0);
+  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.merch-card:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.11);
+}
+
+/* Zona imagen */
+.merch-img{
+  height: 240px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  margin: 30px 0;
+}
+
+.merch-img img{
+  max-width: 86%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+/* Texto abajo */
+.merch-meta{
+  padding: 14px 16px 16px;
+}
+
+.merch-name{
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.merch-price{
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .merch-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .merch-img{ height: 220px; }
+}
+
+@media (max-width: 768px){
+  /* carrusel horizontal tipo shop */
+  .merch{
+    padding: 40px 10px 70px;
+  }
+
+  .merch-grid{
+    grid-template-columns: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 68%;
+    overflow-x: auto;
+    gap: 14px;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .merch-card{
+    scroll-snap-align: start;
+  }
+
+  .merch-img{ height: 240px; }
+
+    .merch-grid{
+    grid-auto-columns: 68%;
+    padding-bottom: 12px; /* para que la scrollbar respire */
+  }
+
+  .merch-img{
+    height: 200px;
+    margin: 5vh 0;
+    padding: 8px;
+  }
+
+  .merch-meta{
+    padding: 12px 14px 14px;
+  }
+}
+
+/* ===== Scroll horizontal merch (igual a yt-thumbs) ===== */
+.merch-grid{
+  scrollbar-width: thin;                /* Firefox */
+  scrollbar-color: #DF2C52 transparent; /* handle rosado + track transparente */
+}
+
+.merch-grid::-webkit-scrollbar{
+  height: 10px;
+}
+
+.merch-grid::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.merch-grid::-webkit-scrollbar-thumb{
+  background: #DF2C52;
+  border-radius: 999px;
+}
+
+.merch-grid::-webkit-scrollbar-thumb:hover{
+  background: #DF2C52;
+}
+
+@media (max-width: 768px){
+  .merch-grid{
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+  }
+  .merch-card{
+    scroll-snap-align: start;
+  }
+}
